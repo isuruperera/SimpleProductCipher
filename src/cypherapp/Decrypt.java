@@ -10,7 +10,7 @@ package cypherapp;
  * @author Isuru Tharanga
  */
 public class Decrypt {
-    String substitution(String input, int key1){
+    private String substitution(String input, int key1){
         StringBuilder s = new StringBuilder();
         int len = input.length();
         char temp;
@@ -43,7 +43,7 @@ public class Decrypt {
         return op;
     }
     
-    String tansposition(String input,int key2)
+    private String tansposition(String input,int key2)
     {
         char output[][]=new char[100][100];
         int len = input.length();

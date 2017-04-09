@@ -11,7 +11,7 @@ package cypherapp;
  */
 public class Encrypt {
     
-        String substitution(String inputText, int key){
+        private String substitution(String inputText, int key1){
         StringBuilder s = new StringBuilder();
         int len = inputText.length();
         char temp;
@@ -22,7 +22,7 @@ public class Encrypt {
             if(Character.isUpperCase(temp))
             {
                 t1 = (int)temp - (int)'A';
-                t1 = (t1 + key)%26;
+                t1 = (t1 + key1)%26;
                 t1 = t1 + (int)'A';
                 temp = (char)t1;
                 s.append(temp);
@@ -30,7 +30,7 @@ public class Encrypt {
             else if(Character.isLowerCase(temp))
             {
                 t1 = (int)temp - (int)'a';
-                t1 = (t1 + key)%26;
+                t1 = (t1 + key1)%26;
                 t1 = t1 + (int)'a';
                 temp = (char)t1;
                 s.append(temp);
@@ -44,7 +44,7 @@ public class Encrypt {
         return op;
     }
         
-    String tansposition(String input,int key2)
+    private String tansposition(String input,int key2)
     {
         char output[][]=new char[100][100];
         int len = input.length();

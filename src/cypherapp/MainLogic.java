@@ -60,7 +60,7 @@ public class MainLogic {
             setSTATUS("Status: input.txt file loaded");
                       
         } catch (FileNotFoundException ex) {
-            setSTATUS("Error: File Not Found");
+            setSTATUS("Error: input.txt file not found in the file directory!");
             Logger.getLogger(MainLogic.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             setSTATUS("Error: File Read Error");

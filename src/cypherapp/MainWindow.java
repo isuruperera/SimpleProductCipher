@@ -22,12 +22,12 @@ public class MainWindow extends javax.swing.JFrame {
     /**
      * Creates new form MainWindow
      */
-    
     private MainLogic mainLogic;
-    
+
     public MainWindow() {
-       initComponents();
-       //this.mainLogic = mainLogic;
+        initComponents();
+        //this.mainLogic = mainLogic;
+        //btnDecrypt.setEnabled(true);
     }
 
     /**
@@ -237,7 +237,7 @@ public class MainWindow extends javax.swing.JFrame {
         messageText.setText("");
         mainLogic.readFile();
         //labelStatus.setText(mainLogic.getSTATUS());
-        logText.append(mainLogic.getSTATUS()+"\n");
+        logText.append(mainLogic.getSTATUS() + "\n");
         messageText.setText(mainLogic.getCipherText());
     }//GEN-LAST:event_btnOpenActionPerformed
 
@@ -258,12 +258,12 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_textKey1KeyTyped
 
     private void textKey1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textKey1KeyReleased
-        try{
+        try {
             String key1 = textKey1.getText();
             Integer.parseInt(key1);
             textKey1.setBackground(Color.white);
-            
-        }catch(Exception e){
+
+        } catch (Exception e) {
             textKey1.setBackground(Color.red);
         }
     }//GEN-LAST:event_textKey1KeyReleased
@@ -273,12 +273,12 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_textKey2ActionPerformed
 
     private void textKey2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textKey2KeyReleased
-       try{
+        try {
             String key1 = textKey2.getText();
             Integer.parseInt(key1);
             textKey2.setBackground(Color.white);
-            
-        }catch(Exception e){
+
+        } catch (Exception e) {
             textKey2.setBackground(Color.red);
         }
     }//GEN-LAST:event_textKey2KeyReleased
@@ -288,21 +288,56 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_textKey2KeyTyped
 
     private void btnEncryptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEncryptActionPerformed
-        try{
-            int key1 = Integer.parseInt(textKey1.getText());
-            int key2 = Integer.parseInt(textKey2.getText());
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(rootPane, "Please enter a numeric value for key");
+        if (!textKey1.getText().equals("") && !textKey2.getText().equals("")) {
+            try {
+                int key1 = Integer.parseInt(textKey1.getText());
+                int key2 = Integer.parseInt(textKey2.getText());
+                mainLogic.encryptText(key1, key2);
+                messageText.setText(mainLogic.getCipherText());
+                mainLogic.setSTATUS("Status: Message encrypted");
+                logText.append(mainLogic.getSTATUS() + "\n");
+               // btnEncrypt.setEnabled(false);
+                //btnDecrypt.setEnabled(true);
+                        
+            } catch (Exception ex) {
+                mainLogic.setSTATUS("Warning: Enter a numeric input as key");
+                logText.append(mainLogic.getSTATUS() + "\n");
+                JOptionPane.showMessageDialog(rootPane, "Please enter a numeric value as key");
+            }
+        }else{
+            mainLogic.setSTATUS("Warning: Keys cannot be empty");
+            logText.append(mainLogic.getSTATUS() + "\n");
         }
+
+
     }//GEN-LAST:event_btnEncryptActionPerformed
 
     private void btnDecryptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDecryptActionPerformed
-        // TODO add your handling code here:
+        if (!textKey1.getText().equals("") && !textKey2.getText().equals("")) {
+            try {
+                int key1 = Integer.parseInt(textKey1.getText());
+                int key2 = Integer.parseInt(textKey2.getText());
+                mainLogic.decryptText(key1, key2);
+                messageText.setText(mainLogic.getCipherText());
+                mainLogic.setSTATUS("Status: Message decrypted");
+                logText.append(mainLogic.getSTATUS() + "\n");
+                //btnEncrypt.setEnabled(true);
+                //btnDecrypt.setEnabled(false);
+
+            } catch (Exception ex) {
+                mainLogic.setSTATUS("Warning: Enter a numeric input as key");
+                logText.append(mainLogic.getSTATUS() + "\n");
+                JOptionPane.showMessageDialog(rootPane, "Please enter a numeric value as key");
+            }
+        }else{
+            mainLogic.setSTATUS("Warning: Keys cannot be empty");
+            logText.append(mainLogic.getSTATUS() + "\n");
+        }
     }//GEN-LAST:event_btnDecryptActionPerformed
 
     private void btnOpen1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpen1ActionPerformed
         mainLogic.writeFile();
-        logText.append(mainLogic.getSTATUS()+"\n");
+        logText.append(mainLogic.getSTATUS() + "\n");
     }//GEN-LAST:event_btnOpen1ActionPerformed
 
     /**
