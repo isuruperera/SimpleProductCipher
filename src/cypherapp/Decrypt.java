@@ -10,42 +10,45 @@ package cypherapp;
  * @author Isuru Tharanga
  */
 public class Decrypt {
+    
+    //logic for reverse substitution
     private String substitution(String input, int key1){
         StringBuilder s = new StringBuilder();
         int len = input.length();
-        char temp;
-        int t1;
+        char tempChar;
+        int charValue;
         for(int i=0;i<len;i++)
         {
-            temp = input.charAt(i);
-            if(Character.isUpperCase(temp))
+            tempChar = input.charAt(i);
+            if(Character.isUpperCase(tempChar))
             {
-                t1 = (int)temp - (int)'A';
-                t1 = (t1 - key1 +26)%26;
-                t1 = t1 + (int)'A';
-                temp = (char)t1;
-                s.append(temp);
+                charValue = (int)tempChar - (int)'A';
+                charValue = (charValue - key1 +26)%26;
+                charValue = charValue + (int)'A';
+                tempChar = (char)charValue;
+                s.append(tempChar);
             }
-            else if(Character.isLowerCase(temp))
+            else if(Character.isLowerCase(tempChar))
             {
-                t1 = (int)temp - (int)'a';
-                t1 = (t1 - key1+26)%26;
-                t1 = t1 + (int)'a';
-                temp = (char)t1;
-                s.append(temp);
+                charValue = (int)tempChar - (int)'a';
+                charValue = (charValue - key1+26)%26;
+                charValue = charValue + (int)'a';
+                tempChar = (char)charValue;
+                s.append(tempChar);
             }
             else
             {
-//                t1 = (int)temp;
-//                t1 = (t1 - key1);
-//                temp = (char)t1;
-                s.append(temp);
+//                charValue = (int)tempChar;
+//                charValue = (charValue - key1);
+//                tempChar = (char)charValue;
+                s.append(tempChar);
             }
         }
         String op = s.toString();
         return op;
     }
     
+    //logic for reverse transposition
     private String tansposition(String input,int key2)
     {
         char output[][]=new char[100][100];
@@ -77,6 +80,8 @@ public class Decrypt {
         return (output2);
     }
     
+    
+    //logic for reverse substitution and transposition iteratively to decrypt
     public String decryptText(String text, int key1, int key2){
         String op = "";
         

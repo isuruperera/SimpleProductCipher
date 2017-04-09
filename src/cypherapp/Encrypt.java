@@ -11,42 +11,44 @@ package cypherapp;
  */
 public class Encrypt {
     
+        //Logic for substitution of values
         private String substitution(String inputText, int key1){
         StringBuilder s = new StringBuilder();
         int len = inputText.length();
-        char temp;
-        int t1;
+        char tempChar;
+        int charValue;
         for(int i=0;i<len;i++)
         {
-            temp = inputText.charAt(i);
-            if(Character.isUpperCase(temp))
+            tempChar = inputText.charAt(i);
+            if(Character.isUpperCase(tempChar))
             {
-                t1 = (int)temp - (int)'A';
-                t1 = (t1 + key1)%26;
-                t1 = t1 + (int)'A';
-                temp = (char)t1;
-                s.append(temp);
+                charValue = (int)tempChar - (int)'A';
+                charValue = (charValue + key1)%26;
+                charValue = charValue + (int)'A';
+                tempChar = (char)charValue;
+                s.append(tempChar);
             }
-            else if(Character.isLowerCase(temp))
+            else if(Character.isLowerCase(tempChar))
             {
-                t1 = (int)temp - (int)'a';
-                t1 = (t1 + key1)%26;
-                t1 = t1 + (int)'a';
-                temp = (char)t1;
-                s.append(temp);
+                charValue = (int)tempChar - (int)'a';
+                charValue = (charValue + key1)%26;
+                charValue = charValue + (int)'a';
+                tempChar = (char)charValue;
+                s.append(tempChar);
             }
             else
             {
-//                t1 = (int)temp;
-//                t1 = (t1 + key1);
-//                temp = (char)t1;
-                s.append(temp);
+//                charValue = (int)tempChar;
+//                charValue = (charValue + key1);
+//                tempChar = (char)charValue;
+                s.append(tempChar);
             }
         }
         String op = s.toString();
         return op;
     }
         
+    //Logic for transposition of values
     private String tansposition(String input,int key2)
     {
         char output[][]=new char[100][100];
@@ -78,7 +80,7 @@ public class Encrypt {
         return (output2);        
     }
      
-    
+    //Encrypt text by doing substitution and transposition
     public String encryptText(String text,int key1, int key2){
         String op = "";
         
