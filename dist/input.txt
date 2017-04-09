@@ -1,2 +1,1 @@
-This is to be ciphered
-New Line
+This sample text will be encrypted
