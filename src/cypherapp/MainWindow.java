@@ -289,22 +289,29 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void btnEncryptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEncryptActionPerformed
         if (!textKey1.getText().equals("") && !textKey2.getText().equals("")) {
-            try {
-                int key1 = Integer.parseInt(textKey1.getText());
-                int key2 = Integer.parseInt(textKey2.getText());
-                mainLogic.encryptText(key1, key2);
-                messageText.setText(mainLogic.getCipherText());
-                mainLogic.setSTATUS("Status: Message encrypted");
+            if (!textKey1.getText().contains("-") && !textKey2.getText().contains("-")) {
+                try {
+                    int key1 = Integer.parseInt(textKey1.getText());
+                    int key2 = Integer.parseInt(textKey2.getText());
+                    mainLogic.setCipherText(messageText.getText());
+                    mainLogic.encryptText(key1, key2);
+                    messageText.setText(mainLogic.getCipherText());
+                    mainLogic.setSTATUS("Status: Message encrypted");
+                    logText.append(mainLogic.getSTATUS() + "\n");
+                    // btnEncrypt.setEnabled(false);
+                    //btnDecrypt.setEnabled(true);
+
+                } catch (Exception ex) {
+                    mainLogic.setSTATUS("Warning: Enter a numeric input as key");
+                    logText.append(mainLogic.getSTATUS() + "\n");
+                    JOptionPane.showMessageDialog(rootPane, "Please enter a numeric value as key");
+                }
+            }else{
+                mainLogic.setSTATUS("Warning: Keys cannot be negative");
                 logText.append(mainLogic.getSTATUS() + "\n");
-               // btnEncrypt.setEnabled(false);
-                //btnDecrypt.setEnabled(true);
-                        
-            } catch (Exception ex) {
-                mainLogic.setSTATUS("Warning: Enter a numeric input as key");
-                logText.append(mainLogic.getSTATUS() + "\n");
-                JOptionPane.showMessageDialog(rootPane, "Please enter a numeric value as key");
             }
-        }else{
+
+        } else {
             mainLogic.setSTATUS("Warning: Keys cannot be empty");
             logText.append(mainLogic.getSTATUS() + "\n");
         }
@@ -314,22 +321,29 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void btnDecryptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDecryptActionPerformed
         if (!textKey1.getText().equals("") && !textKey2.getText().equals("")) {
-            try {
-                int key1 = Integer.parseInt(textKey1.getText());
-                int key2 = Integer.parseInt(textKey2.getText());
-                mainLogic.decryptText(key1, key2);
-                messageText.setText(mainLogic.getCipherText());
-                mainLogic.setSTATUS("Status: Message decrypted");
-                logText.append(mainLogic.getSTATUS() + "\n");
-                //btnEncrypt.setEnabled(true);
-                //btnDecrypt.setEnabled(false);
+            if (!textKey1.getText().contains("-") && !textKey2.getText().contains("-")) {
+                try {
+                    int key1 = Integer.parseInt(textKey1.getText());
+                    int key2 = Integer.parseInt(textKey2.getText());
+                    mainLogic.setCipherText(messageText.getText());
+                    mainLogic.decryptText(key1, key2);
+                    messageText.setText(mainLogic.getCipherText());
+                    mainLogic.setSTATUS("Status: Message decrypted");
+                    logText.append(mainLogic.getSTATUS() + "\n");
+                    //btnEncrypt.setEnabled(true);
+                    //btnDecrypt.setEnabled(false);
 
-            } catch (Exception ex) {
-                mainLogic.setSTATUS("Warning: Enter a numeric input as key");
+                } catch (Exception ex) {
+                    mainLogic.setSTATUS("Warning: Enter a numeric input as key");
+                    logText.append(mainLogic.getSTATUS() + "\n");
+                    JOptionPane.showMessageDialog(rootPane, "Please enter a numeric value as key");
+                }
+            } else {
+                mainLogic.setSTATUS("Warning: Keys cannot be negative");
                 logText.append(mainLogic.getSTATUS() + "\n");
-                JOptionPane.showMessageDialog(rootPane, "Please enter a numeric value as key");
             }
-        }else{
+
+        } else {
             mainLogic.setSTATUS("Warning: Keys cannot be empty");
             logText.append(mainLogic.getSTATUS() + "\n");
         }

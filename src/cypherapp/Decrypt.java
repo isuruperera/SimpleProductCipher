@@ -36,6 +36,9 @@ public class Decrypt {
             }
             else
             {
+//                t1 = (int)temp;
+//                t1 = (t1 - key1);
+//                temp = (char)t1;
                 s.append(temp);
             }
         }
@@ -79,8 +82,8 @@ public class Decrypt {
         
         //System.out.println(op);
         for(int i =0; i<5;i++){
-            op = substitution(text,key1);
-            op = tansposition(op,key2);
+            op = substitution(text,key1+3);
+            op = tansposition(op,key2+3);
         }
         return op;
     
